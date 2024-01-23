@@ -1,0 +1,66 @@
+<div class="container">
+    <form [formGroup]="signupForm" (ngSubmit)="submitForm()">
+      <fieldset>
+        <legend> Sign Up Form</legend>
+          <div class="form-group">
+            <label for="fName">First Name</label>
+            <input type="text" class="form-control" id="fName" formControlName="fName">
+            <span class="text-danger" *ngIf="signupForm.get('fName')?.errors?.['forbiddenName']">First Name is required</span>
+          </div>
+          <div class="form-group">
+            <label for="lName">Last Name</label>
+            <input type="text" class="form-control" id="lName" formControlName="lName">
+          </div>
+          <div class="form-group">
+            <label for="mName">Middle Name</label>
+            <input type="text" class="form-control" id="mName" formControlName="mName">
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="hasNoMiddleName" formControlName="hasNoMiddleName">
+            <label class="form-check-label" for="hasNoMiddleName">I don't have a middle name</label>
+          </div>
+
+          <div formArrayName="favoriteProducts" class="mb-3">
+            <h3>Favorite Products</h3> <button type="button" (click)="addProduct()" class="btn btn-secondary">Add Product</button>
+            <div *ngFor="let product of favoriteProducts.controls; let i=index" class="mt-2">
+              <label>
+                Product:
+                <input type="text" [formControlName]="i">
+              </label>
+            </div>
+          </div>
+
+          <div formGroupName="passwordGroup">
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" id="password" name="password" class="form-control" required formControlName="password"> 
+            </div>
+            <div class="form-group">
+              <label for="password">Confirm Password:</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required formControlName="confirmPassword">
+              <span class="text-danger" *ngIf="signupForm.get('passwordGroup')?.errors?.['mismatch']">Password doesn't match</span>
+            </div>
+            
+
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Submit</button>
+          <button type="button" class="btn btn-primary" (click)="setValue()">Set Value</button>
+          <button type="button" class="btn btn-primary" (click)="patchValue()">Patch Value</button>
+          <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+      </fieldset>
+    </form>
+  </div>
+
+  <div>
+    <div>{{signupForm.value | json}}</div>
+    <div> Dirty: {{signupForm.dirty}}</div>
+    <div> Touched: {{signupForm.touched}}</div>
+    <div> Pristine: {{signupForm.pristine}}</div>
+    <div> Valid: {{signupForm.valid}}</div>
+    <div> Invalid: {{signupForm.invalid}}</div>
+    <div> First Name Touched: {{signupForm.get('fName')?.touched}}</div>
+    <div> First Name Dirty: {{signupForm.get('fName')?.dirty}}</div>
+    <div> First Name Valid: {{signupForm.get('fName')?.valid}}</div>
+    <div> Middle Name Valid: {{signupForm.get('mName')?.valid}}</div>
+  </div>
+  
