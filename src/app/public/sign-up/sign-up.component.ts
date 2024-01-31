@@ -8,14 +8,6 @@ import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, Valid
 })
 export class SignUpComponent implements OnInit {
 
-  // Using FormGroup directly
-  // signupForm = new FormGroup({
-  //   fName: new FormControl('', Validators.required),
-  //   lName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-  //   mName: new FormControl('', Validators.required),
-  //   hasNoMiddleName: new FormControl(false),
-  //   password: new FormControl(''),
-  // });
 
   get firstName() { return this.signupForm.get('fName'); }
 
