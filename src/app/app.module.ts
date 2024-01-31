@@ -11,15 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { PublicModule } from './public/public.module';
 import { ProductDetailComponent } from './product/product-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
+import { ProductModule } from './product/product.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent,
-    ConvertToSpacesPipe,
-    StarComponent,
-    ProductDetailComponent,
     WelcomeComponent
   ],
   imports: [
@@ -27,7 +24,8 @@ import { WelcomeComponent } from './home/welcome.component';
     FormsModule,
     HttpClientModule,
     PublicModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ProductModule
   ],
   bootstrap: [AppComponent]
 })
