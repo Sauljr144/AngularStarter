@@ -11,10 +11,8 @@ import { ProductService } from './product.service';
 export class ProductDetailComponent implements OnInit {
 
   pageTitle: string = 'Product Detail';
- 
   errorMessage: string = '';
 
-  starRate: number = 0;
   
 
   constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) { }
@@ -30,20 +28,15 @@ export class ProductDetailComponent implements OnInit {
       
     }
     
-   
   }
 
   getData(id: number):void {
     this.productService.getProducts().subscribe({
-      next: product =>{
-        this.product = product.find(p => p.productId === id),
-        this.starRate = Number(this.product?.starRating);
-
-      },
+      next: product => this.product = product.find(p => p.productId === id),
       error: err => this.errorMessage = err,
 
     });
-    this.starRate = Number(this.product?.starRating);
+
   }
 
   onBack(): void {

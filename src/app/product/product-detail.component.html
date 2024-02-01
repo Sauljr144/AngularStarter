@@ -3,19 +3,19 @@
     <p>{{ pageTitle + " :" + product?.productName }}</p>
   </div>
   <div>
-    <div class="card-body">
+    <div class="card-body" *ngIf="product">
         <div class="row" >
             <div class="col-6">
-                <img [src]="product?.imageUrl" [alt]="product?.productName" style="width: 300px;"/>
+                <img class="center-block img-responsive" [src]="product.imageUrl" [title]="product.productName" style="width: 300px;"/>
             </div>
             <div class="col-6">
                 <div class="row">
                     <div class="col-6">
-                        <p>Product Code: {{ product?.productCode }}</p>
-                        <p>Available: {{ product?.releaseDate }}</p>
-                        <p>Price: {{ product?.price | currency : "USD" : "symbol" : "1.2-2" }}</p>
-                        <p>Description: {{ product?.description }}</p>
-                        <pm-star [rating]="starRate" ></pm-star>
+                        <p>Product Code: {{ product.productCode }}</p>
+                        <p>Available: {{ product.releaseDate }}</p>
+                        <p>Price: {{ product.price | currency : "USD" : "symbol" : "1.2-2" }}</p>
+                        <p>Description: {{ product.description }}</p>
+                        <pm-star [rating]="product.starRating" ></pm-star>
                     </div>
         </div>
     </div>
