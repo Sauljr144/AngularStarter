@@ -7,9 +7,34 @@ import { Validators, FormBuilder, AbstractControl, ValidationErrors, AbstractCon
 
 export class FormValidationService {
 
+
+  signupForm = this.formBuilder.group({
+    fName: ['', [Validators.required, this.forbiddenName]],
+    lName: this.formBuilder.nonNullable.control('', {validators: [Validators.required, Validators.minLength(2), this.forbiddenName]}),
+    mName: ['', [Validators.required, this.forbiddenName]],
+    email: ['', [Validators.required, Validators.email, this.emailCheck]],
+    hasNoMiddleName: [false],
+   
+    passwordGroup: this.formBuilder.group({
+      password: [''],
+      confirmPassword: ['']
+    }, {validator: this.passwordMatch} as AbstractControlOptions),
+    favoriteProducts: this.formBuilder.array([
+      this.formBuilder.control('')
+    ])
+  });
+
+
   forbiddenName(c: AbstractControl): ValidationErrors | null {
     if (c.value && c.value.toLowerCase() === 'test') {
       return { 'forbiddenName': true};
+    }
+    return null;
+  }
+
+  emailCheck(c: AbstractControl): ValidationErrors | null {
+    if(c.value && !c.value.includes('@')) {
+      return { 'emailCheck': true};
     }
     return null;
   }
@@ -25,6 +50,6 @@ export class FormValidationService {
     }
 
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 }
  
